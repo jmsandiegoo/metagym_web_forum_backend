@@ -1,3 +1,0 @@
--- DROP user table related stuff
-DROP TABLE IF EXISTS "user";
-DROP TYPE IF EXISTS EXPERIENCE_ENUM;
