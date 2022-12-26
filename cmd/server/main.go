@@ -1,18 +1,35 @@
 package main
 
 import (
-	"net/http"
+	"log"
+	"metagym_web_forum_backend/internal/database"
+	"metagym_web_forum_backend/internal/routes"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	loadEnv()
+	loadDatabase()
 	r := gin.Default()
 
-	// Routes
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
-	})
+	// r.GET("/", func(c *gin.Context) {
+	// 	c.JSON(http.StatusOK, gin.H{"data": "hello world"})
+	// })
+	routes.GetRoutes(r)
 
 	r.Run("localhost:8080")
+}
+
+func loadEnv() {
+	err := godotenv.Load(".env.local")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
+func loadDatabase() {
+	database.ConnectDb()
+	database.AutoMigrateDb()
 }
