@@ -13,10 +13,6 @@ func main() {
 	loadEnv()
 	loadDatabase()
 	r := gin.Default()
-
-	// r.GET("/", func(c *gin.Context) {
-	// 	c.JSON(http.StatusOK, gin.H{"data": "hello world"})
-	// })
 	routes.GetRoutes(r)
 
 	r.Run("localhost:8080")

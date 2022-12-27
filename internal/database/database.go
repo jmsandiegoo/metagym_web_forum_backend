@@ -3,7 +3,7 @@ package database
 
 import (
 	"fmt"
-	"metagym_web_forum_backend/internal/models"
+	models "metagym_web_forum_backend/internal/models/database-models"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -12,7 +12,7 @@ import (
 
 var Database *gorm.DB
 
-// start a connection to the specified postgresql db
+// start a connection to the specified postgresql db from env file
 func ConnectDb() {
 	var err error
 	host := os.Getenv("DB_HOST")
