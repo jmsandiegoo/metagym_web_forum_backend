@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// shared db instance accsible by other packages for querying
 var Database *gorm.DB
 
 // start a connection to the specified postgresql db from env file

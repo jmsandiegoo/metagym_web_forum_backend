@@ -2,6 +2,7 @@ package routes
 
 import (
 	"metagym_web_forum_backend/internal/handlers"
+	"metagym_web_forum_backend/internal/middleware"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -15,16 +16,21 @@ func GetRoutes(r *gin.Engine) {
 	})
 
 	// auth routes
-	auth := r.Group("/auth")
+	authRoutes := r.Group("/auth")
 	{
-		auth.POST("/signup", handlers.Signup)
-		auth.POST("/login", handlers.Login)
-		auth.POST("/password-reset")
+		authRoutes.POST("/signup", handlers.Signup)
+		authRoutes.POST("/login", handlers.Login)
+		authRoutes.POST("/password-reset")
 	}
 
-	// user routes
-	user := r.Group(("/user"))
+	// authentication required routes
+	protectedRoutes := r.Group("/api")
+	protectedRoutes.Use(middleware.JWTAuthMiddleware())
 	{
-		user.POST("/onboard")
+		// user routes
+		userRoutes := protectedRoutes.Group(("/user"))
+		{
+			userRoutes.POST("/onboard")
+		}
 	}
 }

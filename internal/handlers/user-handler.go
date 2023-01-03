@@ -77,6 +77,45 @@ func Login(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"jwt": jwt})
 }
 
+func Onboard(context *gin.Context) {
+	var onboardInput apimodels.OnboardInput
+
+	err := context.ShouldBindJSON(&onboardInput)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	userId, err := api.GetTokenUserID(context)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	profile := databasemodels.UserProfile{
+		PfpUrl:     onboardInput.PfpUrl, // TODO File Upload
+		Bio:        onboardInput.Bio,
+		Experience: databasemodels.Experience_enum(onboardInput.Experience),
+		Country:    onboardInput.Country,
+		Height:     onboardInput.Height,
+		Weight:     onboardInput.Weight,
+	}
+
+	profile.UserID = userId
+
+	userProfile, err := dataaccess.CreateNewUserProfile(&profile)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"profile": userProfile})
+
+}
+
 // Login
 
 // Reset Password
