@@ -29,4 +29,7 @@ type UserProfile struct {
 
 	// Foreign keys
 	UserID uuid.UUID
+
+	// has many relationship
+	Interests []Interest `gorm:"many2many:user_interests;"`
 }

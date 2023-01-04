@@ -44,7 +44,7 @@ func ValidateToken(context *gin.Context) error {
 	return errors.New("invalid token provided")
 }
 
-func GetTokenUserID(context *gin.Context) (uuid.UUID, error) {
+func GetTokenUserId(context *gin.Context) (uuid.UUID, error) {
 	err := ValidateToken(context)
 	if err != nil {
 		return uuid.Nil, err
@@ -52,7 +52,7 @@ func GetTokenUserID(context *gin.Context) (uuid.UUID, error) {
 
 	token, _ := GetToken(context)
 	claims, _ := token.Claims.(jwt.MapClaims)
-	userId, _ := uuid.Parse(claims["userID"].(string))
+	userId, _ := uuid.Parse(claims["userId"].(string))
 
 	return userId, nil
 }

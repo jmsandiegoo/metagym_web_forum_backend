@@ -19,7 +19,4 @@ type User struct {
 
 	// Has one associations
 	Profile UserProfile
-
-	// Many to many associations
-	Interests []Interest `gorm:"many2many:user_interests;"`
 }

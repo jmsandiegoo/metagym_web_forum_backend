@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/go-cmp/cmp"
 )
 
 func Signup(context *gin.Context) {
@@ -87,7 +88,23 @@ func Onboard(context *gin.Context) {
 		return
 	}
 
-	userId, err := api.GetTokenUserID(context)
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	currUserProfile, err := dataaccess.FindUserProfileByUserId(userId)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var interests []databasemodels.Interest
+
+	interests, err = dataaccess.FindInterestByIds(onboardInput.Interests)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -101,23 +118,31 @@ func Onboard(context *gin.Context) {
 		Country:    onboardInput.Country,
 		Height:     onboardInput.Height,
 		Weight:     onboardInput.Weight,
+		Age:        onboardInput.Age,
+		Interests:  interests,
 	}
 
 	profile.UserID = userId
 
-	userProfile, err := dataaccess.CreateNewUserProfile(&profile)
+	if (cmp.Equal(currUserProfile, databasemodels.UserProfile{})) {
+		newUserProfile, err := dataaccess.CreateNewUserProfile(&profile)
+		if err != nil {
+			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
 
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+		context.JSON(http.StatusOK, gin.H{"profile": newUserProfile})
+	} else {
+		// TODO
+		profile.UserProfileID = currUserProfile.UserProfileID
+		updatedUserProfile, err := dataaccess.UpdateUserProfile(&profile)
+		if err != nil {
+			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		context.JSON(http.StatusOK, gin.H{"profile": updatedUserProfile})
 	}
-
-	context.JSON(http.StatusOK, gin.H{"profile": userProfile})
-
 }
 
-// Login
-
-// Reset Password
-
-// Onboard
+// Reset Password Todo

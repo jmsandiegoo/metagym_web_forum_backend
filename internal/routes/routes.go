@@ -28,9 +28,9 @@ func GetRoutes(r *gin.Engine) {
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
 	{
 		// user routes
-		userRoutes := protectedRoutes.Group(("/user"))
+		userRoutes := protectedRoutes.Group("/user")
 		{
-			userRoutes.POST("/onboard")
+			userRoutes.POST("/onboard", handlers.Onboard)
 		}
 	}
 }

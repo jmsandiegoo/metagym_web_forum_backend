@@ -53,3 +53,22 @@ func CreateNewUserProfile(userProfile *databasemodels.UserProfile) (*databasemod
 
 	return userProfile, nil
 }
+
+func UpdateUserProfile(userProfile *databasemodels.UserProfile) (*databasemodels.UserProfile, error) {
+	err := database.Database.Save(&userProfile).Error
+
+	if err != nil {
+		return &(databasemodels.UserProfile{}), err
+	}
+
+	return userProfile, nil
+}
+
+func FindUserProfileByUserId(id uuid.UUID) (databasemodels.UserProfile, error) {
+	var userProfile databasemodels.UserProfile
+	err := database.Database.Where("user_id=?", id).Find(&userProfile).Error
+	if err != nil {
+		return databasemodels.UserProfile{}, err
+	}
+	return userProfile, nil
+}
