@@ -15,21 +15,21 @@ const (
 )
 
 type UserProfile struct {
-	UserProfileID uuid.UUID       `gorm:"primaryKey"`
-	Rep           uint            `gorm:"not null; default:0"`
-	PfpUrl        string          `gorm:"not null"`
-	Bio           string          `gorm:"not null"`
-	Experience    Experience_enum `gorm:"not null; default:'beginner'"`
-	Country       string          `gorm:"not null"`
-	Height        float32         `gorm:"not null"`
-	Weight        float32         `gorm:"not null"`
-	Age           int             `gorm:"not null"`
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
+	UserProfileID uuid.UUID       `gorm:"primaryKey" json:"userProfileId"`
+	Rep           uint            `gorm:"not null; default:0" json:"rep"`
+	PfpUrl        string          `gorm:"not null" json:"pfpUrl"`
+	Bio           string          `gorm:"not null" json:"bio"`
+	Experience    Experience_enum `gorm:"not null; default:'beginner'" json:"experience"`
+	Country       string          `gorm:"not null" json:"country"`
+	Height        float32         `gorm:"not null" json:"height"`
+	Weight        float32         `gorm:"not null" json:"weight"`
+	Age           int             `gorm:"not null" json:"age"`
+	CreatedAt     time.Time       `json:"createdAt"`
+	UpdatedAt     time.Time       `json:"updatedAt"`
 
 	// Foreign keys
-	UserID uuid.UUID
+	UserID uuid.UUID `json:"userId"`
 
 	// has many relationship
-	Interests []Interest `gorm:"many2many:user_interests;"`
+	Interests []Interest `gorm:"many2many:user_interests;" json:"interests"`
 }

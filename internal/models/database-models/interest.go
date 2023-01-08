@@ -7,11 +7,11 @@ import (
 )
 
 type Interest struct {
-	InterestID uuid.UUID `gorm:"primaryKey"`
-	Name       string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	InterestID uuid.UUID `gorm:"primaryKey" json:"interestId"`
+	Name       string    `json:"name"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 
 	// Many to many associations
-	UserProfiles []UserProfile `gorm:"many2many:user_interests;"`
+	UserProfiles []UserProfile `gorm:"many2many:user_interests;" json:"userProfiles"`
 }

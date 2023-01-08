@@ -7,16 +7,16 @@ import (
 )
 
 type User struct {
-	UserID     uuid.UUID `gorm:"primaryKey"`
-	Username   string    `gorm:"not null; unique"`
-	Email      string    `gorm:"not null; unique"`
-	FirstName  string    `gorm:"not null"`
-	LastName   string    `gorm:"not null"`
+	UserID     uuid.UUID `gorm:"primaryKey" json:"userId"`
+	Username   string    `gorm:"not null; unique" json:"username"`
+	Email      string    `gorm:"not null; unique" json:"email"`
+	FirstName  string    `gorm:"not null" json:"firstName"`
+	LastName   string    `gorm:"not null" json:"lastName"`
 	Password   string    `gorm:"not null" json:"-"`
-	IsVerified bool      `gorm:"not null; default:true"` // change when implementing OTP
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	IsVerified bool      `gorm:"not null; default:true" json:"isVerified"` // change when implementing OTP
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 
 	// Has one associations
-	Profile UserProfile
+	Profile UserProfile `json:"profile"`
 }
