@@ -38,7 +38,14 @@ func Signup(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"user": newUser})
+	jwt, err := api.GenerateJWT(user)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusCreated, gin.H{"user": newUser, "jwt": jwt})
 }
 
 func Login(context *gin.Context) {
