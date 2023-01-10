@@ -85,6 +85,7 @@ func Login(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"user": user, "jwt": jwt})
 }
 
+// set ups the profile of a new user
 func Onboard(context *gin.Context) {
 	var onboardInput apimodels.OnboardInput
 
@@ -152,9 +153,7 @@ func Onboard(context *gin.Context) {
 	}
 }
 
-// Reset Password Todo
-
-// GetAuthUser
+// Returns authenticated user data with jwt in request
 func GetAuthUser(context *gin.Context) {
 	userId, err := api.GetTokenUserId(context)
 
