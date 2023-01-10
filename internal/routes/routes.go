@@ -30,6 +30,7 @@ func GetRoutes(r *gin.Engine) {
 		// user routes
 		userRoutes := protectedRoutes.Group("/user")
 		{
+			userRoutes.GET("/auth-user", handlers.GetAuthUser)
 			userRoutes.POST("/onboard", handlers.Onboard)
 		}
 	}

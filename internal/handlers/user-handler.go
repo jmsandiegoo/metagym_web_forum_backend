@@ -153,3 +153,22 @@ func Onboard(context *gin.Context) {
 }
 
 // Reset Password Todo
+
+// GetAuthUser
+func GetAuthUser(context *gin.Context) {
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	currUser, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"user": currUser})
+}
