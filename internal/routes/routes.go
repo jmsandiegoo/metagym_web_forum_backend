@@ -33,5 +33,11 @@ func GetRoutes(r *gin.Engine) {
 			userRoutes.GET("/auth-user", handlers.GetAuthUser)
 			userRoutes.POST("/onboard", handlers.Onboard)
 		}
+
+		// interest routes
+		interestRoutes := protectedRoutes.Group("/interest")
+		{
+			interestRoutes.GET("/", handlers.GetAllInterest)
+		}
 	}
 }

@@ -120,7 +120,7 @@ func Onboard(context *gin.Context) {
 	}
 
 	profile := databasemodels.UserProfile{
-		PfpUrl:     onboardInput.PfpUrl, // TODO File Upload
+		PfpUrl:     onboardInput.PfpUrl, // TODO File Upload future feature
 		Bio:        onboardInput.Bio,
 		Experience: databasemodels.Experience_enum(onboardInput.Experience),
 		Country:    onboardInput.Country,

@@ -17,3 +17,14 @@ func FindInterestByIds(ids []uuid.UUID) ([]databasemodels.Interest, error) {
 
 	return interests, nil
 }
+
+func FindAllInterest() ([]databasemodels.Interest, error) {
+	var interests []databasemodels.Interest
+	err := database.Database.Find(&interests).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return interests, nil
+}
