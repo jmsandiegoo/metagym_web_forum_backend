@@ -15,7 +15,7 @@ func GetRoutes(r *gin.Engine) {
 		})
 	})
 
-	// auth routes
+	// auth routess
 	authRoutes := r.Group("/auth")
 	{
 		authRoutes.POST("/signup", handlers.Signup)

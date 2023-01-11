@@ -25,7 +25,7 @@ func CreateNewUser(user *databasemodels.User) (*databasemodels.User, error) {
 // query user by username
 func FindUserByUsername(username string) (databasemodels.User, error) {
 	var user databasemodels.User
-	err := database.Database.Where("username=?", username).Find(&user).Error
+	err := database.Database.Preload("Profile").Where("username=?", username).Find(&user).Error
 	if err != nil {
 		return databasemodels.User{}, err
 	}
@@ -35,7 +35,7 @@ func FindUserByUsername(username string) (databasemodels.User, error) {
 // query user by primary key user_id
 func FindUserById(id uuid.UUID) (databasemodels.User, error) {
 	var user databasemodels.User
-	err := database.Database.First(&user, id).Error
+	err := database.Database.Preload("Profile").First(&user, id).Error
 	if err != nil {
 		return databasemodels.User{}, err
 	}
