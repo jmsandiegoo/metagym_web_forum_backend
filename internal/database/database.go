@@ -3,7 +3,7 @@ package database
 
 import (
 	"fmt"
-	models "metagym_web_forum_backend/internal/models/database-models"
+	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -33,6 +33,24 @@ func ConnectDb() {
 }
 
 // conducts migrations to the connected database (built-in GORM functionality)
+
 func AutoMigrateDb() {
-	Database.AutoMigrate(&(models.User{}), &(models.UserProfile{}))
+
+	Database.AutoMigrate(
+		&(databasemodels.User{}),
+		&(databasemodels.UserProfile{}),
+		&(databasemodels.Interest{}),
+		&(databasemodels.UserInterest{}),
+		&(databasemodels.Comment{}),
+		&(databasemodels.Thread{}),
+		&(databasemodels.ThreadInterest{}),
+		&(databasemodels.PostLike{}),
+		&(databasemodels.PostDislike{}),
+		&(databasemodels.CommentLike{}),
+		&(databasemodels.CommentDislike{}),
+	)
+
+	// custom join tables
+	Database.SetupJoinTable(&(databasemodels.Thread{}), "Interests", &(databasemodels.ThreadInterest{}))
+	Database.SetupJoinTable(&(databasemodels.UserProfile{}), "Interests", &(databasemodels.UserInterest{}))
 }

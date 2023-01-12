@@ -7,7 +7,7 @@ import (
 )
 
 type Thread struct {
-	ThreadID  uuid.UUID `gorm:"primaryKey" json:"threadId"`
+	ID        uuid.UUID `gorm:"primaryKey" json:"threadId"`
 	Title     string    `gorm:"not null" json:"title"`
 	Body      string    `gorm:"not null" json:"body"`
 	CreatedAt time.Time

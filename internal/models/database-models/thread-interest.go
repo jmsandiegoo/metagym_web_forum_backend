@@ -7,8 +7,8 @@ import (
 )
 
 type ThreadInterest struct {
-	ThreadID   uuid.UUID `gorm:"primaryKey"`
-	InterestID uuid.UUID `gorm:"primaryKey"`
+	ThreadID   uuid.UUID `gorm:"primaryKey;"`
+	InterestID uuid.UUID `gorm:"primaryKey;"`
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 }

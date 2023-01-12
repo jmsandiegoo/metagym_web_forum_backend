@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllInterest(context *gin.Context) {
+func HandleGetAllInterest(context *gin.Context) {
 
 	interests, err := dataaccess.FindAllInterest()
 

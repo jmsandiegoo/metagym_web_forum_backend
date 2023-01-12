@@ -11,7 +11,7 @@ import (
 // Saves a new user in database and returns newly created user
 func CreateNewUser(user *databasemodels.User) (*databasemodels.User, error) {
 	// Generate ID and hash password
-	user.UserID = api.GenerateUUID()
+	user.ID = api.GenerateUUID()
 	api.PasswordHash(user)
 
 	// store to database
@@ -44,7 +44,7 @@ func FindUserById(id uuid.UUID) (databasemodels.User, error) {
 
 // User profile
 func CreateNewUserProfile(userProfile *databasemodels.UserProfile) (*databasemodels.UserProfile, error) {
-	userProfile.UserProfileID = api.GenerateUUID()
+	userProfile.ID = api.GenerateUUID()
 	err := database.Database.Create(&userProfile).Error
 
 	if err != nil {

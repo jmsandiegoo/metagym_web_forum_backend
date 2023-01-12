@@ -7,7 +7,7 @@ import (
 )
 
 type Comment struct {
-	CommentID uuid.UUID `gorm:"primaryKey"`
+	ID        uuid.UUID `gorm:"primaryKey"`
 	Body      string    `gorm:"not null" json:"body"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
@@ -17,8 +17,8 @@ type Comment struct {
 	UserID   uuid.UUID `json:"userId"`
 
 	// Has one
-	Thread Thread `gorm:"foreignKey:ThreadID;references:ThreadID" json:"thread"`
-	User   Thread `gorm:"foreignKey:UserID;references:UserID" json:"user"`
+	Thread Thread
+	User   User
 
 	// Many to many relationship
 	UsersLiked    []User `gorm:"many2many:comment_likes;" json:"usersLiked"`

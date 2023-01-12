@@ -30,14 +30,20 @@ func GetRoutes(r *gin.Engine) {
 		// user routes
 		userRoutes := protectedRoutes.Group("/user")
 		{
-			userRoutes.GET("/auth-user", handlers.GetAuthUser)
-			userRoutes.POST("/onboard", handlers.Onboard)
+			userRoutes.GET("/auth-user", handlers.HandleGetAuthUser)
+			userRoutes.POST("/onboard", handlers.HandleOnboard)
 		}
 
 		// interest routes
 		interestRoutes := protectedRoutes.Group("/interest")
 		{
-			interestRoutes.GET("/", handlers.GetAllInterest)
+			interestRoutes.GET("/", handlers.HandleGetAllInterest)
+		}
+
+		threadRoutes := protectedRoutes.Group("/thread")
+		{
+			// threadRoutes.GET("/", handlers.GetAllInterest)
+			threadRoutes.POST("/create", handlers.HandleCreateThread)
 		}
 	}
 }

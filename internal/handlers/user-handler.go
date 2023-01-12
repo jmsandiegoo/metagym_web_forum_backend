@@ -86,7 +86,7 @@ func Login(context *gin.Context) {
 }
 
 // set ups the profile of a new user
-func Onboard(context *gin.Context) {
+func HandleOnboard(context *gin.Context) {
 	var onboardInput apimodels.OnboardInput
 
 	err := context.ShouldBindJSON(&onboardInput)
@@ -141,8 +141,7 @@ func Onboard(context *gin.Context) {
 
 		context.JSON(http.StatusOK, gin.H{"profile": newUserProfile})
 	} else {
-		// TODO
-		profile.UserProfileID = currUserProfile.UserProfileID
+		profile.ID = currUserProfile.ID
 		updatedUserProfile, err := dataaccess.UpdateUserProfile(&profile)
 		if err != nil {
 			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -154,7 +153,7 @@ func Onboard(context *gin.Context) {
 }
 
 // Returns authenticated user data with jwt in request
-func GetAuthUser(context *gin.Context) {
+func HandleGetAuthUser(context *gin.Context) {
 	userId, err := api.GetTokenUserId(context)
 
 	if err != nil {

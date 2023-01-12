@@ -21,7 +21,7 @@ func GenerateJWT(user databasemodels.User) (string, error) {
 	tokenTTL, _ := strconv.Atoi(os.Getenv("TOKEN_TTL"))
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"userId": user.UserID,                                                  // user id
+		"userId": user.ID,                                                      // user id
 		"iat":    time.Now().Unix(),                                            // creation time
 		"exp":    time.Now().Add(time.Second * time.Duration(tokenTTL)).Unix(), // expiry
 	})
