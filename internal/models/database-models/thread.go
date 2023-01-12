@@ -10,8 +10,8 @@ type Thread struct {
 	ID        uuid.UUID `gorm:"primaryKey" json:"threadId"`
 	Title     string    `gorm:"not null" json:"title"`
 	Body      string    `gorm:"not null" json:"body"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 
 	// Foreign keys
 	UserID uuid.UUID `json:"userId"`
