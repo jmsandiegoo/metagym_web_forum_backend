@@ -19,4 +19,14 @@ type User struct {
 
 	// Has one associations
 	Profile UserProfile `json:"profile"`
+
+	// has many associations
+	Threads  []Thread  `json:"threads"`
+	Comments []Comment `json:"comments"`
+
+	// many to many associations
+	LikedThreads     []Thread  `gorm:"many2many:post_likes;" json:"likedThreads"`
+	DislikedThreads  []Thread  `gorm:"many2many:post_dislikes;" json:"dislikedThreads"`
+	LikedComments    []Comment `gorm:"many2many:comment_likes;" json:"likedComments"`
+	DislikedComments []Comment `gorm:"many2many:comment_dislikes;" json:"dislikedComments"`
 }

@@ -14,4 +14,5 @@ type Interest struct {
 
 	// Many to many associations
 	UserProfiles []UserProfile `gorm:"many2many:user_interests;" json:"userProfiles"`
+	Threads      []Thread      `gorm:"many2many:thread_interests;" json:"threads"`
 }
