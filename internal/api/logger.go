@@ -24,9 +24,4 @@ func InitLoggers() {
 	WarningLogger = log.New(multi, "WARNING: ", log.Ldate|log.Ltime|log.Lshortfile)
 	ErrorLogger = log.New(multi, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
 
-	// output to both file and console
-	// InfoLogger.SetOutput(multi)
-	// WarningLogger.SetOutput(multi)
-	// ErrorLogger.SetOutput(multi)
-
 }
