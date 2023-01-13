@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"errors"
 	"metagym_web_forum_backend/internal/api"
 	dataaccess "metagym_web_forum_backend/internal/data-access"
 	apimodels "metagym_web_forum_backend/internal/models/api-models"
@@ -10,7 +9,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 )
 
 func HandleCreateThread(context *gin.Context) {
@@ -21,14 +19,13 @@ func HandleCreateThread(context *gin.Context) {
 
 	if err != nil {
 		// return error
-		context.Error(err)
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	userId, err := api.GetTokenUserId(context)
 
 	if err != nil {
-		// return error
 		context.Error(err)
 		return
 	}
@@ -65,16 +62,13 @@ func HandleGetThread(context *gin.Context) {
 	threadId, err := uuid.Parse(threadIdStr)
 
 	if err != nil {
-		context.Error(err)
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	newThread, err := dataaccess.FindThreadById(threadId)
 
 	if err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			context.AbortWithError(http.StatusNotFound, err)
-		}
 		context.Error(err)
 		return
 	}

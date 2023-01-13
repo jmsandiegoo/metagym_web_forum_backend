@@ -46,3 +46,11 @@ ERROR: 2023/01/13 15:51:31 error-handler.go:23: Authentication Required
 ERROR: 2023/01/13 15:51:31 error-handler.go:25: true
 INFO: 2023/01/13 15:52:26 main.go:26: Starting server...
 ERROR: 2023/01/13 15:52:28 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:32 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:32 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:44 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:44 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:49 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:49 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:54 error-handler.go:22: Authentication Required
+ERROR: 2023/01/13 16:13:54 error-handler.go:22: Authentication Required

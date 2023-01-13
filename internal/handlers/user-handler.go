@@ -18,7 +18,7 @@ func Signup(context *gin.Context) {
 
 	if err != nil {
 		// return error
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
@@ -34,14 +34,14 @@ func Signup(context *gin.Context) {
 
 	if err != nil {
 		// return error
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
 	jwt, err := api.GenerateJWT(user)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
@@ -54,31 +54,28 @@ func Login(context *gin.Context) {
 	err := context.ShouldBindJSON(&loginInput)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error()})
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	user, err := dataaccess.FindUserByUsername(loginInput.Username)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
 	err = api.ValidatePassword(loginInput.Password, &user)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
 	jwt, err := api.GenerateJWT(user)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
@@ -92,21 +89,21 @@ func HandleOnboard(context *gin.Context) {
 	err := context.ShouldBindJSON(&onboardInput)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	userId, err := api.GetTokenUserId(context)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	currUserProfile, err := dataaccess.FindUserProfileByUserId(userId)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
@@ -115,7 +112,7 @@ func HandleOnboard(context *gin.Context) {
 	interests, err = dataaccess.FindInterestByIds(onboardInput.Interests)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
@@ -135,7 +132,7 @@ func HandleOnboard(context *gin.Context) {
 	if (cmp.Equal(currUserProfile, databasemodels.UserProfile{})) {
 		newUserProfile, err := dataaccess.CreateNewUserProfile(&profile)
 		if err != nil {
-			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			context.Error(err)
 			return
 		}
 
@@ -144,7 +141,7 @@ func HandleOnboard(context *gin.Context) {
 		profile.ID = currUserProfile.ID
 		updatedUserProfile, err := dataaccess.UpdateUserProfile(&profile)
 		if err != nil {
-			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			context.Error(err)
 			return
 		}
 
@@ -156,15 +153,15 @@ func HandleOnboard(context *gin.Context) {
 func HandleGetAuthUser(context *gin.Context) {
 	userId, err := api.GetTokenUserId(context)
 
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if err == nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
 
 	currUser, err := dataaccess.FindUserById(userId)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
