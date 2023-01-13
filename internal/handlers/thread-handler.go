@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"fmt"
+	"errors"
 	"metagym_web_forum_backend/internal/api"
 	dataaccess "metagym_web_forum_backend/internal/data-access"
 	apimodels "metagym_web_forum_backend/internal/models/api-models"
@@ -9,6 +9,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 func HandleCreateThread(context *gin.Context) {
@@ -19,15 +21,15 @@ func HandleCreateThread(context *gin.Context) {
 
 	if err != nil {
 		// return error
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
-	fmt.Printf("%+v", threadInput)
+
 	userId, err := api.GetTokenUserId(context)
 
 	if err != nil {
 		// return error
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
 
@@ -36,13 +38,9 @@ func HandleCreateThread(context *gin.Context) {
 	interests, err = dataaccess.FindInterestByIds(threadInput.Interests)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
 		return
 	}
-	fmt.Printf("Intersts gotten: %v", interests)
-	// for _, s := range interests {
-	// 	fmt.Printf("%+v", s)
-	// }
 
 	thread := databasemodels.Thread{
 		Title:     threadInput.Title,
@@ -54,7 +52,30 @@ func HandleCreateThread(context *gin.Context) {
 	newThread, err := dataaccess.CreateNewThread(&thread)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"thread": newThread})
+}
+
+func HandleGetThread(context *gin.Context) {
+	threadIdStr := context.Param("threadId")
+
+	threadId, err := uuid.Parse(threadIdStr)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	newThread, err := dataaccess.FindThreadById(threadId)
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			context.AbortWithError(http.StatusNotFound, err)
+		}
+		context.Error(err)
 		return
 	}
 

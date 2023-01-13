@@ -12,8 +12,7 @@ func HandleGetAllInterest(context *gin.Context) {
 	interests, err := dataaccess.FindAllInterest()
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error()})
+		context.Error(err)
 		return
 	}
 

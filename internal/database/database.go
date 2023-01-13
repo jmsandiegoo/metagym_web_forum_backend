@@ -3,6 +3,7 @@ package database
 
 import (
 	"fmt"
+	"metagym_web_forum_backend/internal/api"
 	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 	"os"
 
@@ -26,6 +27,7 @@ func ConnectDb() {
 	Database, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
+		api.ErrorLogger.Println(err.Error())
 		panic(err)
 	} else {
 		fmt.Println("Successfully connected to the database")

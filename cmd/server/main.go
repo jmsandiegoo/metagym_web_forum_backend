@@ -2,7 +2,9 @@ package main
 
 import (
 	"log"
+	"metagym_web_forum_backend/internal/api"
 	"metagym_web_forum_backend/internal/database"
+	"metagym_web_forum_backend/internal/middleware"
 	"metagym_web_forum_backend/internal/routes"
 
 	"github.com/gin-contrib/cors"
@@ -11,6 +13,7 @@ import (
 )
 
 func main() {
+	api.InitLoggers()
 	loadEnv()
 	loadDatabase()
 	r := gin.Default()
@@ -19,10 +22,11 @@ func main() {
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
-
+	r.Use(middleware.ErrorHandlerMiddleware())
+	api.InfoLogger.Println("Starting server...")
 	routes.GetRoutes(r)
-
 	r.Run("localhost:8080")
+	api.InfoLogger.Println("Server is now listening on localhost:8080")
 }
 
 func loadEnv() {

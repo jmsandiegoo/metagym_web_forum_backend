@@ -66,7 +66,7 @@ func UpdateUserProfile(userProfile *databasemodels.UserProfile) (*databasemodels
 
 func FindUserProfileByUserId(id uuid.UUID) (databasemodels.UserProfile, error) {
 	var userProfile databasemodels.UserProfile
-	err := database.Database.Where("user_id=?", id).Find(&userProfile).Error
+	err := database.Database.Where("id=?", id).Find(&userProfile).Error
 	if err != nil {
 		return databasemodels.UserProfile{}, err
 	}

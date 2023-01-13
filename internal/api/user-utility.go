@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 
 	"golang.org/x/crypto/bcrypt"
@@ -21,7 +20,7 @@ func PasswordHash(user *databasemodels.User) error {
 func ValidatePassword(password string, user *databasemodels.User) error {
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return errors.New("Invalid credentials")
+		return ErrUser{Message: "Invalid Credentials", Err: err}
 	}
 	return err
 }
