@@ -54,3 +54,112 @@ ERROR: 2023/01/13 16:13:49 error-handler.go:22: Authentication Required
 ERROR: 2023/01/13 16:13:49 error-handler.go:22: Authentication Required
 ERROR: 2023/01/13 16:13:54 error-handler.go:22: Authentication Required
 ERROR: 2023/01/13 16:13:54 error-handler.go:22: Authentication Required
+INFO: 2023/01/14 00:27:28 main.go:26: Starting server...
+ERROR: 2023/01/14 00:27:32 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 00:27:32 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:08 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:08 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:14 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:14 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:18 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:01:18 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:03:27 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:03:27 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:03:29 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:03:29 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:10 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:10 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:18 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:18 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:27 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:04:27 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:06:02 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:06:02 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:03 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:03 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:19 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:19 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:39 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:39 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:42 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:42 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:50 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:07:50 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:16:11 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:16:11 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 01:21:13 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:21:13 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:21:35 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:21:35 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:26:37 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:26:37 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:27:01 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:27:01 error-handler.go:17: Invalid User Request
+INFO: 2023/01/14 01:27:59 main.go:26: Starting server...
+ERROR: 2023/01/14 01:28:10 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:28:10 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:34:43 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:34:43 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:35:23 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:35:23 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:01 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:01 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:06 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:06 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:07 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:36:07 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:40:37 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:40:37 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:41:33 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:44:36 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:44:36 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:50:40 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:50:58 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:56:30 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:57:38 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:57:43 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:57:54 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:57:54 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:01 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:01 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:32 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:32 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:39 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:39 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:45 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 01:58:45 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:00:41 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 02:00:47 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 02:00:47 error-handler.go:17: Authentication Required
+ERROR: 2023/01/14 02:00:55 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:00:55 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:23 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:23 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:32 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:35 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:35 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:01:54 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:04:38 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:04:38 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:05:16 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:05:26 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:05:58 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:07:41 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:07:53 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:08:06 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:08:42 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:08:46 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:09:00 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:09:00 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:09:12 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:09:12 error-handler.go:17: Invalid User Request
+INFO: 2023/01/14 02:10:01 main.go:26: Starting server...
+ERROR: 2023/01/14 02:10:04 thread-handler.go:65: invalid UUID length: 3
+ERROR: 2023/01/14 02:10:04 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:10:04 thread-handler.go:65: invalid UUID length: 3
+ERROR: 2023/01/14 02:10:04 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:10:18 thread-handler.go:65: invalid UUID length: 3
+ERROR: 2023/01/14 02:10:18 error-handler.go:17: Invalid User Request
+ERROR: 2023/01/14 02:10:18 thread-handler.go:65: invalid UUID length: 3
+ERROR: 2023/01/14 02:10:18 error-handler.go:17: Invalid User Request
+INFO: 2023/01/14 02:29:50 main.go:26: Starting server...

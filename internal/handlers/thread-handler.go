@@ -66,7 +66,35 @@ func HandleGetThread(context *gin.Context) {
 		return
 	}
 
-	newThread, err := dataaccess.FindThreadById(threadId)
+	thread, err := dataaccess.FindThreadById(threadId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"thread": thread})
+}
+
+func HandleEditThread(context *gin.Context) {
+	threadIdStr := context.Param("threadId")
+
+	threadId, err := uuid.Parse(threadIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	thread, err := dataaccess.FindThreadById(threadId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	// Do update
+	newThread, err := dataaccess.UpdateThread(&thread)
 
 	if err != nil {
 		context.Error(err)
@@ -75,3 +103,5 @@ func HandleGetThread(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{"thread": newThread})
 }
+
+// Todo handleDeleteThread once comment is done

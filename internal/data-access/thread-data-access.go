@@ -22,10 +22,20 @@ func CreateNewThread(thread *databasemodels.Thread) (*databasemodels.Thread, err
 
 func FindThreadById(id uuid.UUID) (databasemodels.Thread, error) {
 	var thread databasemodels.Thread
-	err := database.Database.Where("id=?", id).Find(&thread).Error
+	err := database.Database.Preload("Interests").Where("id=?", id).Find(&thread).Error
 
 	if err != nil {
 		return databasemodels.Thread{}, err
+	}
+
+	return thread, nil
+}
+
+func UpdateThread(thread *databasemodels.Thread) (*databasemodels.Thread, error) {
+	err := database.Database.Save(&thread).Error
+
+	if err != nil {
+		return &(databasemodels.Thread{}), err
 	}
 
 	return thread, nil

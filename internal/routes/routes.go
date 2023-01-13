@@ -44,8 +44,8 @@ func GetRoutes(r *gin.Engine) {
 		{
 			threadRoutes.GET("/:threadId", handlers.HandleGetThread)
 			threadRoutes.POST("/create", handlers.HandleCreateThread)
-			threadRoutes.PUT("/:threadId")
-			threadRoutes.DELETE("/:threadId")
+			threadRoutes.PUT("/:threadId", handlers.HandleEditThread)
+			// threadRoutes.DELETE("/:threadId")
 		}
 	}
 }

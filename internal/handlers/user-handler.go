@@ -153,7 +153,7 @@ func HandleOnboard(context *gin.Context) {
 func HandleGetAuthUser(context *gin.Context) {
 	userId, err := api.GetTokenUserId(context)
 
-	if err == nil {
+	if err != nil {
 		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
 		return
 	}
