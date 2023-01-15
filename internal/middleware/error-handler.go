@@ -18,6 +18,9 @@ func ErrorHandlerMiddleware() gin.HandlerFunc {
 			if errors.As(err.Err, &(api.ErrNotAuthenticated{})) {
 				context.JSON(http.StatusUnauthorized, gin.H{"error": err.Err.Error()})
 				return
+			} else if errors.As(err.Err, &(api.ErrNotAuthorized{})) {
+				context.JSON(http.StatusForbidden, gin.H{"error": err.Err.Error()})
+				return
 			} else if errors.As(err.Err, &(api.ErrUser{})) {
 				context.JSON(http.StatusBadRequest, gin.H{"error": err.Err.Error()}) // Todo when doin validation
 				return

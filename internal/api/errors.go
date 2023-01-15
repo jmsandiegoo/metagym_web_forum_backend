@@ -12,17 +12,17 @@ func (e ErrNotAuthenticated) Unwrap() error {
 	return e.Err
 }
 
-// type ErrInvalidCredentials struct {
-// 	Err error
-// }
+type ErrNotAuthorized struct {
+	Err error
+}
 
-// func (e ErrInvalidCredentials) Error() string {
-// 	return "Invalid Credentials"
-// }
+func (e ErrNotAuthorized) Error() string {
+	return "No permission to carry out the request"
+}
 
-// func (e ErrInvalidCredentials) Unwrap() error {
-// 	return e.Err
-// }
+func (e ErrNotAuthorized) Unwrap() error {
+	return e.Err
+}
 
 type ErrUser struct {
 	Message      string

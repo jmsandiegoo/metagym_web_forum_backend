@@ -53,7 +53,17 @@ func HandleCreateThread(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"thread": newThread})
+	user, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"thread": apimodels.ThreadResponse{
+		Thread: *newThread,
+		User:   user,
+	}})
 }
 
 func HandleGetThread(context *gin.Context) {
@@ -73,16 +83,40 @@ func HandleGetThread(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"thread": thread})
+	user, err := dataaccess.FindUserById(thread.UserID)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"thread": apimodels.ThreadResponse{
+		Thread: thread,
+		User:   user,
+	}})
 }
 
 func HandleEditThread(context *gin.Context) {
-	threadIdStr := context.Param("threadId")
+	var threadInput apimodels.ThreadInput
+	err := context.ShouldBindJSON(&threadInput)
 
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	threadIdStr := context.Param("threadId")
 	threadId, err := uuid.Parse(threadIdStr)
 
 	if err != nil {
 		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.Error(err)
 		return
 	}
 
@@ -93,6 +127,23 @@ func HandleEditThread(context *gin.Context) {
 		return
 	}
 
+	// check for 403 Todo
+	if thread.UserID != userId {
+		context.Error(api.ErrNotAuthorized{Err: err})
+		return
+	}
+
+	interests, err := dataaccess.FindInterestByIds(threadInput.Interests)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	thread.Title = threadInput.Title
+	thread.Body = threadInput.Body
+	thread.Interests = interests
+
 	// Do update
 	newThread, err := dataaccess.UpdateThread(&thread)
 
@@ -101,7 +152,17 @@ func HandleEditThread(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"thread": newThread})
+	user, err := dataaccess.FindUserById(thread.UserID)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"thread": apimodels.ThreadResponse{
+		Thread: *newThread,
+		User:   user,
+	}})
 }
 
 // Todo handleDeleteThread once comment is done
