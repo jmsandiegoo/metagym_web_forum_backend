@@ -3,6 +3,7 @@ package handlers
 import (
 	"metagym_web_forum_backend/internal/api"
 	dataaccess "metagym_web_forum_backend/internal/data-access"
+	"metagym_web_forum_backend/internal/database"
 	apimodels "metagym_web_forum_backend/internal/models/api-models"
 	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 	"net/http"
@@ -166,3 +167,88 @@ func HandleEditThread(context *gin.Context) {
 }
 
 // Todo handleDeleteThread once comment is done
+
+// Upvote Thread
+func HandleUpvoteThread(context *gin.Context) {
+	threadIdStr := context.Param("threadId")
+	threadId, err := uuid.Parse(threadIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	var voteInput apimodels.VoteInput
+
+	err = context.ShouldBindJSON(&voteInput)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	user, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+	var thread databasemodels.Thread
+
+	thread, err = dataaccess.FindThreadById(threadId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	// check if user already upvoted
+
+	// handle database query in one transaction here
+
+	tx := database.Database.Begin()
+
+	if voteInput.Flag {
+		err = dataaccess.AddUsersLikedThread(&thread, &user, tx)
+	} else {
+		err = dataaccess.DeleteUsersLikedThread(&thread, &user, tx)
+	}
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	if voteInput.Flag {
+		err = dataaccess.AddUserProfileRep(&(user.Profile), 10, tx)
+	} else {
+		err = dataaccess.SubtractUserProfileRep(&(user.Profile), 10, tx)
+	}
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	err = tx.Commit().Error
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+	// newThread, err := dataaccess.
+	context.JSON(http.StatusOK, gin.H{})
+}
+
+func HandleDownvoteThread(context *gin.Context) {
+
+}

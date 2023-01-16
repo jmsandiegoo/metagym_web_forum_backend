@@ -6,6 +6,7 @@ import (
 	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 // Saves a new user in database and returns newly created user
@@ -71,4 +72,20 @@ func FindUserProfileByUserId(id uuid.UUID) (databasemodels.UserProfile, error) {
 		return databasemodels.UserProfile{}, err
 	}
 	return userProfile, nil
+}
+
+func AddUserProfileRep(userProfile *databasemodels.UserProfile, addRepVal int, tx *gorm.DB) error {
+	newRep := userProfile.Rep + uint(addRepVal)
+
+	err := tx.Model(&userProfile).Update("rep", newRep).Error
+
+	return err
+}
+
+func SubtractUserProfileRep(userProfile *databasemodels.UserProfile, subRepVal int, tx *gorm.DB) error {
+	newRep := userProfile.Rep + uint(subRepVal)
+
+	err := tx.Model(&userProfile).Update("rep", newRep).Error
+
+	return err
 }

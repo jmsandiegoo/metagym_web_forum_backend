@@ -31,7 +31,12 @@ type ErrUser struct {
 }
 
 func (e ErrUser) Error() string {
-	return e.Message
+	var res string
+	res = e.Message
+	if e.Err != nil {
+		res += " " + e.Err.Error()
+	}
+	return res
 }
 
 // Todo stringify map
