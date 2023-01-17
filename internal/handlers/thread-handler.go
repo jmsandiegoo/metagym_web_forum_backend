@@ -226,26 +226,56 @@ func HandleUpvoteThread(context *gin.Context) {
 		return
 	}
 
+	// check if user is in disliked association if yes then x2 upvote val
+	addVoteVal := 10
+	var usersDisliked []databasemodels.User
+
+	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIds(&thread, []uuid.UUID{userId})
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		context.Error(err)
+		return
+	}
+
+	if len(usersDisliked) > 0 {
+		addVoteVal *= 2
+	}
+
 	// handle database query in one transaction here
 
 	tx := database.Database.Begin()
 
 	if voteInput.Flag {
 		err = dataaccess.AddUsersLikedThread(&thread, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
+		err = dataaccess.DeleteUsersDislikedThread(&thread, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
 	} else {
 		err = dataaccess.DeleteUsersLikedThread(&thread, &user, tx)
-	}
 
-	if err != nil {
-		tx.Rollback()
-		context.Error(err)
-		return
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
 	}
 
 	if voteInput.Flag {
-		err = dataaccess.AddUserProfileRep(&(user.Profile), 10, tx)
+		err = dataaccess.AddUserProfileRep(&(user.Profile), addVoteVal, tx)
 	} else {
-		err = dataaccess.SubtractUserProfileRep(&(user.Profile), 10, tx)
+		err = dataaccess.SubtractUserProfileRep(&(user.Profile), addVoteVal, tx)
 	}
 
 	if err != nil {
@@ -304,19 +334,34 @@ func HandleDownvoteThread(context *gin.Context) {
 		return
 	}
 
-	var usersLiked []databasemodels.User
+	var usersDisliked []databasemodels.User
 
-	// check if user already upvoted
-	usersLiked, err = dataaccess.FindThreadUsersDislikedByIds(&thread, []uuid.UUID{userId})
+	// check if user already downvoted
+	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIds(&thread, []uuid.UUID{userId})
 
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		context.Error(err)
 		return
 	}
 
-	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+	if (len(usersDisliked) > 0 && voteInput.Flag == true) || (len(usersDisliked) == 0 && voteInput.Flag == false) {
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
+	}
+
+	// check if user is in liked association if yes then x2 downvotevote val
+	subVoteVal := 10
+	var usersLiked []databasemodels.User
+
+	usersLiked, err = dataaccess.FindThreadUsersLikedByIds(&thread, []uuid.UUID{userId})
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		context.Error(err)
+		return
+	}
+
+	if len(usersLiked) > 0 {
+		subVoteVal *= 2
 	}
 
 	// handle database query in one transaction here
@@ -325,20 +370,34 @@ func HandleDownvoteThread(context *gin.Context) {
 
 	if voteInput.Flag {
 		err = dataaccess.AddUsersDislikedThread(&thread, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
+		err = dataaccess.DeleteUsersLikedThread(&thread, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
 	} else {
 		err = dataaccess.DeleteUsersDislikedThread(&thread, &user, tx)
-	}
 
-	if err != nil {
-		tx.Rollback()
-		context.Error(err)
-		return
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
 	}
 
 	if voteInput.Flag {
-		err = dataaccess.SubtractUserProfileRep(&(user.Profile), 10, tx)
+		err = dataaccess.SubtractUserProfileRep(&(user.Profile), subVoteVal, tx)
 	} else {
-		err = dataaccess.AddUserProfileRep(&(user.Profile), 10, tx)
+		err = dataaccess.AddUserProfileRep(&(user.Profile), subVoteVal, tx)
 	}
 
 	if err != nil {

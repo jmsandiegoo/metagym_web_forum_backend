@@ -51,12 +51,6 @@ func AddUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.Use
 		return err
 	}
 
-	err = DeleteUsersDislikedThread(thread, user, tx)
-
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -72,12 +66,6 @@ func DeleteUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.
 
 func AddUsersDislikedThread(thread *databasemodels.Thread, user *databasemodels.User, tx *gorm.DB) error {
 	err := tx.Model(&thread).Association("UsersDisliked").Append(user)
-
-	if err != nil {
-		return err
-	}
-
-	err = DeleteUsersLikedThread(thread, user, tx)
 
 	if err != nil {
 		return err
