@@ -83,7 +83,7 @@ func AddUserProfileRep(userProfile *databasemodels.UserProfile, addRepVal int, t
 }
 
 func SubtractUserProfileRep(userProfile *databasemodels.UserProfile, subRepVal int, tx *gorm.DB) error {
-	newRep := userProfile.Rep + uint(subRepVal)
+	newRep := userProfile.Rep - uint(subRepVal)
 
 	err := tx.Model(&userProfile).Update("rep", newRep).Error
 
