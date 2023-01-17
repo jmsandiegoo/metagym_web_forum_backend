@@ -49,5 +49,12 @@ func GetRoutes(r *gin.Engine) {
 			threadRoutes.PUT("/:threadId", handlers.HandleEditThread)
 			// threadRoutes.DELETE("/:threadId")
 		}
+
+		commentRoutes := protectedRoutes.Group("/comment")
+		{
+			commentRoutes.POST("/create", handlers.HandleCreateComment)
+			commentRoutes.PUT("/:commentId", handlers.HandleEditComment)
+			commentRoutes.DELETE("/:commentId", handlers.HandleDeleteComment)
+		}
 	}
 }

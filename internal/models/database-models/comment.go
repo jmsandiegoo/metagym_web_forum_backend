@@ -7,7 +7,7 @@ import (
 )
 
 type Comment struct {
-	ID        uuid.UUID `gorm:"primaryKey"`
+	ID        uuid.UUID `gorm:"primaryKey" json:"commentId"`
 	Body      string    `gorm:"not null" json:"body"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`

@@ -130,7 +130,7 @@ func HandleEditThread(context *gin.Context) {
 		return
 	}
 
-	// check for 403 Todo
+	// check for 403
 	if thread.UserID != userId {
 		context.Error(api.ErrNotAuthorized{Err: err})
 		return
