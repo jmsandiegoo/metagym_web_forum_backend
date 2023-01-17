@@ -61,7 +61,7 @@ func AddUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.Use
 }
 
 func DeleteUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.User, tx *gorm.DB) error {
-	err := tx.Model(&thread).Association("UsersLiked").Delete(*user)
+	err := tx.Model(&thread).Association("UsersLiked").Delete(user)
 
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func DeleteUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.
 }
 
 func AddUsersDislikedThread(thread *databasemodels.Thread, user *databasemodels.User, tx *gorm.DB) error {
-	err := tx.Model(&thread).Association("UsersDisliked").Append(*user)
+	err := tx.Model(&thread).Association("UsersDisliked").Append(user)
 
 	if err != nil {
 		return err
@@ -99,6 +99,17 @@ func DeleteUsersDislikedThread(thread *databasemodels.Thread, user *databasemode
 func FindThreadUsersLikedByIds(thread *databasemodels.Thread, ids []uuid.UUID) ([]databasemodels.User, error) {
 	var users []databasemodels.User
 	err := database.Database.Model(&thread).Where(ids).Association("UsersLiked").Find(&users)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
+func FindThreadUsersDislikedByIds(thread *databasemodels.Thread, ids []uuid.UUID) ([]databasemodels.User, error) {
+	var users []databasemodels.User
+	err := database.Database.Model(&thread).Where(ids).Association("UsersDisliked").Find(&users)
 
 	if err != nil {
 		return nil, err
