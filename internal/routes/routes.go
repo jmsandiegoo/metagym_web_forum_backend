@@ -53,8 +53,11 @@ func GetRoutes(r *gin.Engine) {
 		commentRoutes := protectedRoutes.Group("/comment")
 		{
 			commentRoutes.POST("/create", handlers.HandleCreateComment)
+			commentRoutes.POST("/upvote/:commentId", handlers.HandleUpvoteComment)
+			commentRoutes.POST("/downvote/:commentId", handlers.HandleDownvoteComment)
 			commentRoutes.PUT("/:commentId", handlers.HandleEditComment)
 			commentRoutes.DELETE("/:commentId", handlers.HandleDeleteComment)
+
 		}
 	}
 }

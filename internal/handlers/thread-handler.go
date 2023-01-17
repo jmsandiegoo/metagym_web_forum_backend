@@ -412,6 +412,6 @@ func HandleDownvoteThread(context *gin.Context) {
 		context.Error(err)
 		return
 	}
-	// newThread, err := dataaccess.
+
 	context.JSON(http.StatusOK, gin.H{})
 }

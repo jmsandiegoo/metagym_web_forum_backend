@@ -1,14 +1,17 @@
 package handlers
 
 import (
+	"errors"
 	"metagym_web_forum_backend/internal/api"
 	dataaccess "metagym_web_forum_backend/internal/data-access"
+	"metagym_web_forum_backend/internal/database"
 	apimodels "metagym_web_forum_backend/internal/models/api-models"
 	databasemodels "metagym_web_forum_backend/internal/models/database-models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 func HandleCreateComment(context *gin.Context) {
@@ -165,5 +168,260 @@ func HandleDeleteComment(context *gin.Context) {
 }
 
 // upvote
+func HandleUpvoteComment(context *gin.Context) {
+	commentIdStr := context.Param("commentId")
+	commentId, err := uuid.Parse(commentIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	var voteInput apimodels.VoteInput
+
+	err = context.ShouldBindJSON(&voteInput)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	user, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	// handle database query in one transaction here
+
+	tx := database.Database.Begin()
+
+	var comment databasemodels.Comment
+
+	comment, err = dataaccess.FindCommentByIdLocked(commentId, tx)
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	// handle database query in one transaction here
+
+	var usersLiked []databasemodels.User
+
+	// check if user already upvoted
+	usersLiked, err = dataaccess.FindCommentUsersLikedByIdsLocked(&comment, []uuid.UUID{userId}, tx)
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+		tx.Rollback()
+		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
+		return
+	}
+
+	// check if user is in disliked association if yes then x2 upvote val
+	addVoteVal := 10
+	var usersDisliked []databasemodels.User
+
+	usersDisliked, err = dataaccess.FindCommentUsersDislikedByIdsLocked(&comment, []uuid.UUID{userId}, tx)
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	if len(usersDisliked) > 0 {
+		addVoteVal *= 2
+	}
+
+	if voteInput.Flag {
+		err = dataaccess.AddUsersLikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
+		err = dataaccess.DeleteUsersDislikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
+	} else {
+		err = dataaccess.DeleteUsersLikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	}
+
+	if voteInput.Flag {
+		err = dataaccess.AddUserProfileRep(&(user.Profile), addVoteVal, tx)
+	} else {
+		err = dataaccess.SubtractUserProfileRep(&(user.Profile), addVoteVal, tx)
+	}
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	err = tx.Commit().Error
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+	// newThread, err := dataaccess.
+	context.JSON(http.StatusOK, gin.H{})
+}
 
 // downvote
+func HandleDownvoteComment(context *gin.Context) {
+	commentIdStr := context.Param("commentId")
+	commentId, err := uuid.Parse(commentIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	var voteInput apimodels.VoteInput
+
+	err = context.ShouldBindJSON(&voteInput)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	user, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	// handle database query in one transaction here
+
+	tx := database.Database.Begin()
+
+	var comment databasemodels.Comment
+
+	comment, err = dataaccess.FindCommentByIdLocked(commentId, tx)
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	var usersDisliked []databasemodels.User
+
+	// check if user already downvoted
+	usersDisliked, err = dataaccess.FindCommentUsersDislikedByIdsLocked(&comment, []uuid.UUID{userId}, tx)
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	if (len(usersDisliked) > 0 && voteInput.Flag == true) || (len(usersDisliked) == 0 && voteInput.Flag == false) {
+		tx.Rollback()
+		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
+		return
+	}
+
+	// check if user is in liked association if yes then x2 downvotevote val
+	subVoteVal := 10
+	var usersLiked []databasemodels.User
+
+	usersLiked, err = dataaccess.FindCommentUsersLikedByIdsLocked(&comment, []uuid.UUID{userId}, tx)
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	if len(usersLiked) > 0 {
+		subVoteVal *= 2
+	}
+
+	if voteInput.Flag {
+		err = dataaccess.AddUsersDislikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+
+		err = dataaccess.DeleteUsersLikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	} else {
+		err = dataaccess.DeleteUsersDislikedComment(&comment, &user, tx)
+
+		if err != nil {
+			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	}
+
+	if voteInput.Flag {
+		err = dataaccess.SubtractUserProfileRep(&(user.Profile), subVoteVal, tx)
+	} else {
+		err = dataaccess.AddUserProfileRep(&(user.Profile), subVoteVal, tx)
+	}
+
+	if err != nil {
+		tx.Rollback()
+		context.Error(err)
+		return
+	}
+
+	err = tx.Commit().Error
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{})
+}

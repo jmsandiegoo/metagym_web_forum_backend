@@ -369,3 +369,20 @@ INFO: 2023/01/17 23:16:37 main.go:26: Starting server...
 ERROR: 2023/01/17 23:17:15 error-handler.go:17: Authentication Required
 ERROR: 2023/01/17 23:18:34 error-handler.go:17: Authentication Required
 ERROR: 2023/01/17 23:18:40 error-handler.go:17: Authentication Required
+INFO: 2023/01/18 00:49:12 main.go:26: Starting server...
+INFO: 2023/01/18 00:49:12 main.go:29: Server is now listening on localhost:8080
+INFO: 2023/01/18 00:52:40 main.go:26: Starting server...
+ERROR: 2023/01/18 00:52:46 error-handler.go:17: Authentication Required
+ERROR: 2023/01/18 00:53:28 error-handler.go:17: Authentication Required
+ERROR: 2023/01/18 00:53:28 error-handler.go:17: Authentication Required
+ERROR: 2023/01/18 00:53:41 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:53:44 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:53:49 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:54:50 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:54:51 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:55:01 error-handler.go:17: Invalid Request
+ERROR: 2023/01/18 00:58:42 error-handler.go:17: Invalid User Request invalid UUID length: 0
+ERROR: 2023/01/18 00:58:49 error-handler.go:17: Authentication Required
+ERROR: 2023/01/18 00:59:04 error-handler.go:17: Invalid User Request invalid UUID length: 0
+ERROR: 2023/01/18 01:03:06 error-handler.go:17: Invalid User Request invalid UUID length: 0
+INFO: 2023/01/18 01:03:30 main.go:26: Starting server...
