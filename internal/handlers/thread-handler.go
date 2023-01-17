@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"errors"
 	"metagym_web_forum_backend/internal/api"
 	dataaccess "metagym_web_forum_backend/internal/data-access"
 	"metagym_web_forum_backend/internal/database"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 func HandleCreateThread(context *gin.Context) {
@@ -209,7 +211,20 @@ func HandleUpvoteThread(context *gin.Context) {
 		return
 	}
 
+	var usersLiked []databasemodels.User
+
 	// check if user already upvoted
+	usersLiked, err = dataaccess.FindThreadUsersLikedByIds(&thread, []uuid.UUID{userId})
+
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		context.Error(err)
+		return
+	}
+
+	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
+		return
+	}
 
 	// handle database query in one transaction here
 
