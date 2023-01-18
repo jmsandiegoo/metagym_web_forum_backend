@@ -53,6 +53,55 @@ func UpdateThread(thread *databasemodels.Thread) (*databasemodels.Thread, error)
 	return thread, nil
 }
 
+func DeleteThread(thread *databasemodels.Thread) error {
+	tx := database.Database.Begin()
+
+	// Delete associations
+	err := tx.Where("thread_id = ?", thread.ID).Delete(&databasemodels.PostLike{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Where("thread_id = ?", thread.ID).Delete(&databasemodels.PostDislike{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Where("thread_id = ?", thread.ID).Delete(&databasemodels.ThreadInterest{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Where("thread_id = ?", thread.ID).Delete(&databasemodels.Comment{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	// Delete the thread record
+	err = tx.Delete(&thread).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Commit().Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // Vote related functions requires a gorm transaction variable
 
 func AddUsersLikedThread(thread *databasemodels.Thread, user *databasemodels.User, tx *gorm.DB) error {

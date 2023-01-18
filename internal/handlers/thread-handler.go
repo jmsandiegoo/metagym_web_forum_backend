@@ -169,6 +169,47 @@ func HandleEditThread(context *gin.Context) {
 }
 
 // Todo handleDeleteThread once comment is done
+func HandleDeleteThread(context *gin.Context) {
+	threadIdStr := context.Param("threadId")
+	threadId, err := uuid.Parse(threadIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	userId, err := api.GetTokenUserId(context)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	var thread databasemodels.Thread
+
+	thread, err = dataaccess.FindThreadById(threadId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	// check for 403
+	if thread.UserID != userId {
+		context.Error(api.ErrNotAuthorized{Err: err})
+		return
+	}
+
+	// Delete thread
+	err = dataaccess.DeleteThread(&thread)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{})
+}
 
 // Upvote Thread
 func HandleUpvoteThread(context *gin.Context) {
@@ -228,7 +269,7 @@ func HandleUpvoteThread(context *gin.Context) {
 		return
 	}
 
-	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+	if (len(usersLiked) > 0 && voteInput.Flag) || (len(usersLiked) == 0 && !voteInput.Flag) {
 		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
@@ -277,6 +318,16 @@ func HandleUpvoteThread(context *gin.Context) {
 		}
 	}
 
+	// fetch thread user if it is not the reqeustor
+	if thread.UserID != userId {
+		user, err = dataaccess.FindUserById(thread.UserID)
+
+		if err != nil {
+			context.Error(err)
+			return
+		}
+	}
+
 	if voteInput.Flag {
 		err = dataaccess.AddUserProfileRep(&(user.Profile), addVoteVal, tx)
 	} else {
@@ -295,7 +346,6 @@ func HandleUpvoteThread(context *gin.Context) {
 		context.Error(err)
 		return
 	}
-	// newThread, err := dataaccess.
 	context.JSON(http.StatusOK, gin.H{})
 }
 
@@ -356,7 +406,7 @@ func HandleDownvoteThread(context *gin.Context) {
 		return
 	}
 
-	if (len(usersDisliked) > 0 && voteInput.Flag == true) || (len(usersDisliked) == 0 && voteInput.Flag == false) {
+	if (len(usersDisliked) > 0 && voteInput.Flag) || (len(usersDisliked) == 0 && !voteInput.Flag) {
 		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
@@ -399,6 +449,16 @@ func HandleDownvoteThread(context *gin.Context) {
 
 		if err != nil {
 			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	}
+
+	// fetch thread user if it is not the reqeustor
+	if thread.UserID != userId {
+		user, err = dataaccess.FindUserById(thread.UserID)
+
+		if err != nil {
 			context.Error(err)
 			return
 		}

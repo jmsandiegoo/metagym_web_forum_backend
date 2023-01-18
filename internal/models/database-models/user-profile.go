@@ -16,7 +16,7 @@ const (
 
 type UserProfile struct {
 	ID         uuid.UUID       `gorm:"primaryKey" json:"userProfileId"`
-	Rep        uint            `gorm:"not null; default:0" json:"rep"`
+	Rep        int             `gorm:"not null; default:0" json:"rep"`
 	PfpUrl     string          `gorm:"not null" json:"pfpUrl"`
 	Bio        string          `gorm:"not null" json:"bio"`
 	Experience Experience_enum `gorm:"not null; default:'beginner'" json:"experience"`

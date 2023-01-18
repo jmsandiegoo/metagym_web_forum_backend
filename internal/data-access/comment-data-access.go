@@ -57,7 +57,31 @@ func UpdateComment(comment *databasemodels.Comment) (*databasemodels.Comment, er
 }
 
 func DeleteComment(comment *databasemodels.Comment) error {
-	err := database.Database.Delete(&comment).Error
+	tx := database.Database.Begin()
+
+	// delete associations
+	err := tx.Where("comment_id = ?", comment.ID).Delete(&databasemodels.CommentLike{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Where("comment_id = ?", comment.ID).Delete(&databasemodels.CommentDislike{}).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	// Delete commment
+	err = tx.Delete(&comment).Error
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Commit().Error
 
 	if err != nil {
 		return err

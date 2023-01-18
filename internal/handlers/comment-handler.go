@@ -227,7 +227,7 @@ func HandleUpvoteComment(context *gin.Context) {
 		return
 	}
 
-	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+	if (len(usersLiked) > 0 && voteInput.Flag) || (len(usersLiked) == 0 && !voteInput.Flag) {
 		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
@@ -271,6 +271,16 @@ func HandleUpvoteComment(context *gin.Context) {
 
 		if err != nil {
 			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	}
+
+	// fetch thread user if it is not the reqeustor
+	if comment.UserID != userId {
+		user, err = dataaccess.FindUserById(comment.UserID)
+
+		if err != nil {
 			context.Error(err)
 			return
 		}
@@ -356,7 +366,7 @@ func HandleDownvoteComment(context *gin.Context) {
 		return
 	}
 
-	if (len(usersDisliked) > 0 && voteInput.Flag == true) || (len(usersDisliked) == 0 && voteInput.Flag == false) {
+	if (len(usersDisliked) > 0 && voteInput.Flag) || (len(usersDisliked) == 0 && !voteInput.Flag) {
 		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
@@ -399,6 +409,16 @@ func HandleDownvoteComment(context *gin.Context) {
 
 		if err != nil {
 			tx.Rollback()
+			context.Error(err)
+			return
+		}
+	}
+
+	// fetch thread user if it is not the reqeustor
+	if comment.UserID != userId {
+		user, err = dataaccess.FindUserById(comment.UserID)
+
+		if err != nil {
 			context.Error(err)
 			return
 		}

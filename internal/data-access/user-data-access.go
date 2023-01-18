@@ -75,16 +75,14 @@ func FindUserProfileByUserId(id uuid.UUID) (databasemodels.UserProfile, error) {
 }
 
 func AddUserProfileRep(userProfile *databasemodels.UserProfile, addRepVal int, tx *gorm.DB) error {
-	newRep := userProfile.Rep + uint(addRepVal)
-
+	newRep := userProfile.Rep + addRepVal
 	err := tx.Model(&userProfile).Update("rep", newRep).Error
 
 	return err
 }
 
 func SubtractUserProfileRep(userProfile *databasemodels.UserProfile, subRepVal int, tx *gorm.DB) error {
-	newRep := userProfile.Rep - uint(subRepVal)
-
+	newRep := userProfile.Rep - subRepVal
 	err := tx.Model(&userProfile).Update("rep", newRep).Error
 
 	return err

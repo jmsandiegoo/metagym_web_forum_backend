@@ -47,7 +47,7 @@ func GetRoutes(r *gin.Engine) {
 			threadRoutes.POST("/upvote/:threadId", handlers.HandleUpvoteThread)
 			threadRoutes.POST("/downvote/:threadId", handlers.HandleDownvoteThread)
 			threadRoutes.PUT("/:threadId", handlers.HandleEditThread)
-			// threadRoutes.DELETE("/:threadId")
+			threadRoutes.DELETE("/:threadId", handlers.HandleDeleteThread)
 		}
 
 		commentRoutes := protectedRoutes.Group("/comment")
