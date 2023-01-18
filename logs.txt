@@ -386,3 +386,6 @@ ERROR: 2023/01/18 00:58:49 error-handler.go:17: Authentication Required
 ERROR: 2023/01/18 00:59:04 error-handler.go:17: Invalid User Request invalid UUID length: 0
 ERROR: 2023/01/18 01:03:06 error-handler.go:17: Invalid User Request invalid UUID length: 0
 INFO: 2023/01/18 01:03:30 main.go:26: Starting server...
+INFO: 2023/01/18 21:29:56 main.go:26: Starting server...
+ERROR: 2023/01/18 21:30:11 error-handler.go:17: Authentication Required
+ERROR: 2023/01/18 21:30:11 error-handler.go:17: Authentication Required

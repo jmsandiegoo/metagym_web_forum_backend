@@ -37,9 +37,6 @@ func FindCommentById(id uuid.UUID) (databasemodels.Comment, error) {
 
 func FindCommentByIdLocked(id uuid.UUID, tx *gorm.DB) (databasemodels.Comment, error) {
 	var comment databasemodels.Comment // garbage collected once no reference
-	// err := database.Database.Preload("Thread").Where("id=?", id).Find(&comment).Error
-
-	// locks row until tx is committed or rolledback
 	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).Find(&comment).Error
 
 	if err != nil {

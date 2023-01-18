@@ -202,11 +202,17 @@ func HandleUpvoteThread(context *gin.Context) {
 		context.Error(err)
 		return
 	}
+
+	// handle database query in one transaction here
+
 	var thread databasemodels.Thread
 
-	thread, err = dataaccess.FindThreadById(threadId)
+	tx := database.Database.Begin()
+
+	thread, err = dataaccess.FindThreadByIdLocked(threadId, tx)
 
 	if err != nil {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
@@ -214,14 +220,16 @@ func HandleUpvoteThread(context *gin.Context) {
 	var usersLiked []databasemodels.User
 
 	// check if user already upvoted
-	usersLiked, err = dataaccess.FindThreadUsersLikedByIds(&thread, []uuid.UUID{userId})
+	usersLiked, err = dataaccess.FindThreadUsersLikedByIdsLocked(&thread, []uuid.UUID{userId}, tx)
 
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
 
 	if (len(usersLiked) > 0 && voteInput.Flag == true) || (len(usersLiked) == 0 && voteInput.Flag == false) {
+		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
 	}
@@ -230,9 +238,10 @@ func HandleUpvoteThread(context *gin.Context) {
 	addVoteVal := 10
 	var usersDisliked []databasemodels.User
 
-	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIds(&thread, []uuid.UUID{userId})
+	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIdsLocked(&thread, []uuid.UUID{userId}, tx)
 
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
@@ -240,10 +249,6 @@ func HandleUpvoteThread(context *gin.Context) {
 	if len(usersDisliked) > 0 {
 		addVoteVal *= 2
 	}
-
-	// handle database query in one transaction here
-
-	tx := database.Database.Begin()
 
 	if voteInput.Flag {
 		err = dataaccess.AddUsersLikedThread(&thread, &user, tx)
@@ -325,11 +330,17 @@ func HandleDownvoteThread(context *gin.Context) {
 		context.Error(err)
 		return
 	}
+
+	// handle database query in one transaction here
+
+	tx := database.Database.Begin()
+
 	var thread databasemodels.Thread
 
-	thread, err = dataaccess.FindThreadById(threadId)
+	thread, err = dataaccess.FindThreadByIdLocked(threadId, tx)
 
 	if err != nil {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
@@ -337,14 +348,16 @@ func HandleDownvoteThread(context *gin.Context) {
 	var usersDisliked []databasemodels.User
 
 	// check if user already downvoted
-	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIds(&thread, []uuid.UUID{userId})
+	usersDisliked, err = dataaccess.FindThreadUsersDislikedByIdsLocked(&thread, []uuid.UUID{userId}, tx)
 
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
 
 	if (len(usersDisliked) > 0 && voteInput.Flag == true) || (len(usersDisliked) == 0 && voteInput.Flag == false) {
+		tx.Rollback()
 		context.Error(api.ErrUser{Message: "Invalid Request", Err: err})
 		return
 	}
@@ -353,9 +366,10 @@ func HandleDownvoteThread(context *gin.Context) {
 	subVoteVal := 10
 	var usersLiked []databasemodels.User
 
-	usersLiked, err = dataaccess.FindThreadUsersLikedByIds(&thread, []uuid.UUID{userId})
+	usersLiked, err = dataaccess.FindThreadUsersLikedByIdsLocked(&thread, []uuid.UUID{userId}, tx)
 
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
 		context.Error(err)
 		return
 	}
@@ -363,10 +377,6 @@ func HandleDownvoteThread(context *gin.Context) {
 	if len(usersLiked) > 0 {
 		subVoteVal *= 2
 	}
-
-	// handle database query in one transaction here
-
-	tx := database.Database.Begin()
 
 	if voteInput.Flag {
 		err = dataaccess.AddUsersDislikedThread(&thread, &user, tx)

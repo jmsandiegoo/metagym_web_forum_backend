@@ -7,6 +7,7 @@ import (
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 func CreateNewThread(thread *databasemodels.Thread) (*databasemodels.Thread, error) {
@@ -25,6 +26,16 @@ func FindThreadById(id uuid.UUID) (databasemodels.Thread, error) {
 	var thread databasemodels.Thread
 	err := database.Database.Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Where("id=?", id).Find(&thread).Error
 
+	if err != nil {
+		return databasemodels.Thread{}, err
+	}
+
+	return thread, nil
+}
+
+func FindThreadByIdLocked(id uuid.UUID, tx *gorm.DB) (databasemodels.Thread, error) {
+	var thread databasemodels.Thread // garbage collected once no reference
+	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).Find(&thread).Error
 	if err != nil {
 		return databasemodels.Thread{}, err
 	}
@@ -84,9 +95,9 @@ func DeleteUsersDislikedThread(thread *databasemodels.Thread, user *databasemode
 	return nil
 }
 
-func FindThreadUsersLikedByIds(thread *databasemodels.Thread, ids []uuid.UUID) ([]databasemodels.User, error) {
+func FindThreadUsersLikedByIdsLocked(thread *databasemodels.Thread, ids []uuid.UUID, tx *gorm.DB) ([]databasemodels.User, error) {
 	var users []databasemodels.User
-	err := database.Database.Model(&thread).Where(ids).Association("UsersLiked").Find(&users)
+	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Model(&thread).Where(ids).Association("UsersLiked").Find(&users)
 
 	if err != nil {
 		return nil, err
@@ -95,9 +106,9 @@ func FindThreadUsersLikedByIds(thread *databasemodels.Thread, ids []uuid.UUID) (
 	return users, nil
 }
 
-func FindThreadUsersDislikedByIds(thread *databasemodels.Thread, ids []uuid.UUID) ([]databasemodels.User, error) {
+func FindThreadUsersDislikedByIdsLocked(thread *databasemodels.Thread, ids []uuid.UUID, tx *gorm.DB) ([]databasemodels.User, error) {
 	var users []databasemodels.User
-	err := database.Database.Model(&thread).Where(ids).Association("UsersDisliked").Find(&users)
+	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Model(&thread).Where(ids).Association("UsersDisliked").Find(&users)
 
 	if err != nil {
 		return nil, err

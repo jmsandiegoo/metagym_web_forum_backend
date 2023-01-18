@@ -57,7 +57,6 @@ func GetRoutes(r *gin.Engine) {
 			commentRoutes.POST("/downvote/:commentId", handlers.HandleDownvoteComment)
 			commentRoutes.PUT("/:commentId", handlers.HandleEditComment)
 			commentRoutes.DELETE("/:commentId", handlers.HandleDeleteComment)
-
 		}
 	}
 }
