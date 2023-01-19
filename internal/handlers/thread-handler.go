@@ -71,7 +71,6 @@ func HandleCreateThread(context *gin.Context) {
 
 func HandleGetThread(context *gin.Context) {
 	threadIdStr := context.Param("threadId")
-
 	threadId, err := uuid.Parse(threadIdStr)
 
 	if err != nil {

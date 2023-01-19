@@ -27,6 +27,7 @@ func GetRoutes(r *gin.Engine) {
 	protectedRoutes := r.Group("/api")
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
 	{
+		protectedRoutes.GET("/search", handlers.HandleSearch)
 		// user routes
 		userRoutes := protectedRoutes.Group("/user")
 		{
