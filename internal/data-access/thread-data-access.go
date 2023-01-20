@@ -57,7 +57,7 @@ func FindThreadByInterestAndTitle(interest_ids []uuid.UUID, title string) ([]dat
 
 	// find the specific thread
 	var threads []databasemodels.Thread
-	err := chain.Order("threads.created_at desc").Preload("Interests").Find(&threads).Error
+	err := chain.Order("threads.created_at desc").Preload("Interests").Preload("User").Find(&threads).Error
 
 	if err != nil {
 		return nil, err

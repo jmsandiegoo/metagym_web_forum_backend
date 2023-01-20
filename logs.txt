@@ -474,3 +474,45 @@ INFO: 2023/01/19 21:28:58 main.go:26: Starting server...
 ERROR: 2023/01/19 21:55:32 error-handler.go:17: Authentication Required
 ERROR: 2023/01/19 21:55:32 error-handler.go:17: Authentication Required
 INFO: 2023/01/19 23:15:52 main.go:26: Starting server...
+INFO: 2023/01/20 00:14:01 main.go:26: Starting server...
+ERROR: 2023/01/20 00:19:45 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 00:19:45 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 00:53:56 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 01:28:52 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 02:06:54 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 10:39:22 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 15:31:09 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 16:48:32 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 16:48:32 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 17:08:33 error-handler.go:17: Invalid User Request invalid UUID length: 82
+ERROR: 2023/01/20 17:08:38 error-handler.go:17: Invalid User Request invalid UUID length: 82
+ERROR: 2023/01/20 17:08:47 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:09:27 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:09:39 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:09:44 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:09:51 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:01 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:03 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:04 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:04 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:04 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:05 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:06 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:06 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:10:39 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/20 17:11:24 error-handler.go:17: Invalid User Request invalid UUID length: 82
+ERROR: 2023/01/20 22:27:56 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 22:27:56 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 22:27:56 error-handler.go:17: Authentication Required
+ERROR: 2023/01/20 22:27:56 error-handler.go:17: Authentication Required
+INFO: 2023/01/20 22:28:40 main.go:26: Starting server...
+INFO: 2023/01/20 22:32:23 main.go:26: Starting server...
+INFO: 2023/01/20 22:34:46 main.go:26: Starting server...
+ERROR: 2023/01/20 22:34:48 error-handler.go:17: invalid field found for struct metagym_web_forum_backend/internal/models/database-models.Thread's field Owner: define a valid foreign key for relations or implement the Valuer/Scanner interface
+ERROR: 2023/01/20 22:34:48 error-handler.go:17: invalid field found for struct metagym_web_forum_backend/internal/models/database-models.Thread's field Owner: define a valid foreign key for relations or implement the Valuer/Scanner interface
+ERROR: 2023/01/20 22:34:54 error-handler.go:17: invalid field found for struct metagym_web_forum_backend/internal/models/database-models.Thread's field Owner: define a valid foreign key for relations or implement the Valuer/Scanner interface
+ERROR: 2023/01/20 22:34:54 error-handler.go:17: invalid field found for struct metagym_web_forum_backend/internal/models/database-models.Thread's field Owner: define a valid foreign key for relations or implement the Valuer/Scanner interface
+INFO: 2023/01/20 22:35:26 main.go:26: Starting server...
+ERROR: 2023/01/20 22:36:15 error-handler.go:17: record not found
+ERROR: 2023/01/20 22:36:15 error-handler.go:17: record not found
+INFO: 2023/01/20 22:37:42 main.go:26: Starting server...

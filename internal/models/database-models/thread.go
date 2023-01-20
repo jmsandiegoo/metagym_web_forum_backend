@@ -15,6 +15,7 @@ type Thread struct {
 
 	// Foreign keys
 	UserID uuid.UUID `json:"userId"`
+	User   User      `json:"user"`
 
 	// Has many association
 	Comments []Comment `json:"comments"`
