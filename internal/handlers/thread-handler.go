@@ -85,17 +85,7 @@ func HandleGetThread(context *gin.Context) {
 		return
 	}
 
-	user, err := dataaccess.FindUserById(thread.UserID)
-
-	if err != nil {
-		context.Error(err)
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"thread": apimodels.ThreadResponse{
-		Thread: thread,
-		User:   user,
-	}})
+	context.JSON(http.StatusOK, gin.H{"thread": thread})
 }
 
 func HandleEditThread(context *gin.Context) {
@@ -154,17 +144,7 @@ func HandleEditThread(context *gin.Context) {
 		return
 	}
 
-	user, err := dataaccess.FindUserById(thread.UserID)
-
-	if err != nil {
-		context.Error(err)
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"thread": apimodels.ThreadResponse{
-		Thread: *newThread,
-		User:   user,
-	}})
+	context.JSON(http.StatusOK, gin.H{"thread": &newThread})
 }
 
 // Todo handleDeleteThread once comment is done

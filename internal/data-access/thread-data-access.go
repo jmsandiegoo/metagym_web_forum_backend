@@ -24,7 +24,7 @@ func CreateNewThread(thread *databasemodels.Thread) (*databasemodels.Thread, err
 
 func FindThreadById(id uuid.UUID) (databasemodels.Thread, error) {
 	var thread databasemodels.Thread
-	err := database.Database.Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Where("id=?", id).Find(&thread).Error
+	err := database.Database.Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Preload("User.Profile").Where("id=?", id).Find(&thread).Error
 
 	if err != nil {
 		return databasemodels.Thread{}, err
@@ -57,7 +57,7 @@ func FindThreadByInterestAndTitle(interest_ids []uuid.UUID, title string) ([]dat
 
 	// find the specific thread
 	var threads []databasemodels.Thread
-	err := chain.Order("threads.created_at desc").Preload("Interests").Preload("User").Find(&threads).Error
+	err := chain.Order("threads.created_at desc").Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Preload("User.Profile").Find(&threads).Error
 
 	if err != nil {
 		return nil, err
