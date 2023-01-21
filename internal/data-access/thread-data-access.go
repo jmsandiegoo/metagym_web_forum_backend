@@ -43,11 +43,11 @@ func FindThreadByIdLocked(id uuid.UUID, tx *gorm.DB) (databasemodels.Thread, err
 	return thread, nil
 }
 
-func FindThreadByInterestAndTitle(interest_ids []uuid.UUID, title string) ([]databasemodels.Thread, error) {
+func FindThreadByInterestAndTitle(interestIds []uuid.UUID, title string) ([]databasemodels.Thread, error) {
 	chain := database.Database.Debug()
 	// Join // add select
-	if len(interest_ids) > 0 {
-		chain = chain.Select("*").Joins("inner join thread_interests ti on ti.thread_id = threads.id").Where("ti.interest_id IN ?", interest_ids)
+	if len(interestIds) > 0 {
+		chain = chain.Select("*").Joins("inner join thread_interests ti on ti.thread_id = threads.id").Where("ti.interest_id IN ?", interestIds)
 	}
 
 	// title keyword

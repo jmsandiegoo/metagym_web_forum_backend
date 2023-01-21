@@ -24,6 +24,17 @@ func CreateNewComment(comment *databasemodels.Comment) (*databasemodels.Comment,
 	return comment, nil
 }
 
+func FindCommentsByThreadId(threadId uuid.UUID) ([]databasemodels.Comment, error) {
+	var comments []databasemodels.Comment
+	err := database.Database.Where("thread_id = ?", threadId).Preload("User").Find(&comments).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return comments, nil
+}
+
 func FindCommentById(id uuid.UUID) (databasemodels.Comment, error) {
 	var comment databasemodels.Comment // garbage collected once no reference
 	err := database.Database.Preload("Thread").Where("id=?", id).Find(&comment).Error

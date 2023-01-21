@@ -14,6 +14,25 @@ import (
 	"gorm.io/gorm"
 )
 
+func HandleGetThreadComments(context *gin.Context) {
+	threadIdStr := context.Param("threadId")
+	threadId, err := uuid.Parse(threadIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	comments, err := dataaccess.FindCommentsByThreadId(threadId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"comments": comments})
+}
+
 func HandleCreateComment(context *gin.Context) {
 
 	var commentInput apimodels.CommentInput

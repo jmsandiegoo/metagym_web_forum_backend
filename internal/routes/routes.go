@@ -29,19 +29,19 @@ func GetRoutes(r *gin.Engine) {
 	{
 		protectedRoutes.GET("/search", handlers.HandleSearch)
 		// user routes
-		userRoutes := protectedRoutes.Group("/user")
+		userRoutes := protectedRoutes.Group("/users")
 		{
 			userRoutes.GET("/auth-user", handlers.HandleGetAuthUser)
 			userRoutes.POST("/onboard", handlers.HandleOnboard)
 		}
 
 		// interest routes
-		interestRoutes := protectedRoutes.Group("/interest")
+		interestRoutes := protectedRoutes.Group("/interests")
 		{
 			interestRoutes.GET("/", handlers.HandleGetAllInterest)
 		}
 
-		threadRoutes := protectedRoutes.Group("/thread")
+		threadRoutes := protectedRoutes.Group("/threads")
 		{
 			threadRoutes.GET("/:threadId", handlers.HandleGetThread)
 			threadRoutes.POST("/create", handlers.HandleCreateThread)
@@ -51,8 +51,9 @@ func GetRoutes(r *gin.Engine) {
 			threadRoutes.DELETE("/:threadId", handlers.HandleDeleteThread)
 		}
 
-		commentRoutes := protectedRoutes.Group("/comment")
+		commentRoutes := protectedRoutes.Group("/comments")
 		{
+			commentRoutes.GET("/:threadId", handlers.HandleGetThreadComments)
 			commentRoutes.POST("/create", handlers.HandleCreateComment)
 			commentRoutes.POST("/upvote/:commentId", handlers.HandleUpvoteComment)
 			commentRoutes.POST("/downvote/:commentId", handlers.HandleDownvoteComment)
