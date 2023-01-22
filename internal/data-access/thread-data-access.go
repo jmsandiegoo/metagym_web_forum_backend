@@ -52,7 +52,7 @@ func FindThreadByInterestAndTitle(interestIds []uuid.UUID, title string) ([]data
 
 	// title keyword
 	if title != "" {
-		chain = chain.Where("title LIKE ?", "%"+title+"%")
+		chain = chain.Where("LOWER(title) LIKE LOWER(?)", "%"+title+"%")
 	}
 
 	// find the specific thread
