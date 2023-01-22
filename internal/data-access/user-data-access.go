@@ -7,6 +7,7 @@ import (
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // Saves a new user in database and returns newly created user
@@ -36,7 +37,7 @@ func FindUserByUsername(username string) (databasemodels.User, error) {
 // query user by primary key user_id
 func FindUserById(id uuid.UUID) (databasemodels.User, error) {
 	var user databasemodels.User
-	err := database.Database.Preload("Profile").First(&user, id).Error
+	err := database.Database.Preload("Threads."+clause.Associations).Preload("Profile").First(&user, id).Error
 	if err != nil {
 		return databasemodels.User{}, err
 	}

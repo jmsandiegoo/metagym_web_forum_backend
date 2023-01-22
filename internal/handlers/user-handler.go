@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/uuid"
 )
 
 func Signup(context *gin.Context) {
@@ -166,4 +167,23 @@ func HandleGetAuthUser(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{"user": currUser})
+}
+
+func HandleGetUser(context *gin.Context) {
+	userIdStr := context.Param("userId")
+	userId, err := uuid.Parse(userIdStr)
+
+	if err != nil {
+		context.Error(api.ErrUser{Message: "Invalid User Request", Err: err})
+		return
+	}
+
+	user, err := dataaccess.FindUserById(userId)
+
+	if err != nil {
+		context.Error(err)
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"user": user})
 }

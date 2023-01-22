@@ -631,3 +631,20 @@ ERROR: 2023/01/22 12:20:28 error-handler.go:17: Authentication Required
 ERROR: 2023/01/22 13:05:12 error-handler.go:17: Authentication Required
 ERROR: 2023/01/22 13:05:12 error-handler.go:17: Authentication Required
 INFO: 2023/01/22 13:42:46 main.go:26: Starting server...
+ERROR: 2023/01/22 13:48:38 error-handler.go:17: ERROR: duplicate key value violates unique constraint "users_email_key" (SQLSTATE 23505)
+ERROR: 2023/01/22 14:58:54 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 14:58:54 error-handler.go:17: Authentication Required
+INFO: 2023/01/22 15:34:06 main.go:26: Starting server...
+INFO: 2023/01/22 15:34:53 main.go:26: Starting server...
+INFO: 2023/01/22 15:38:08 main.go:26: Starting server...
+ERROR: 2023/01/22 15:38:11 error-handler.go:17: Threads~~~as~~~: unsupported relations for schema User
+ERROR: 2023/01/22 15:38:13 error-handler.go:17: Threads~~~as~~~: unsupported relations for schema User
+INFO: 2023/01/22 15:38:32 main.go:26: Starting server...
+ERROR: 2023/01/22 15:51:59 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 15:52:19 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 15:52:19 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 15:59:22 error-handler.go:17: Invalid User Request invalid UUID length: 6
+ERROR: 2023/01/22 15:59:24 error-handler.go:17: Invalid User Request invalid UUID length: 6
+ERROR: 2023/01/22 15:59:54 error-handler.go:17: Invalid User Request invalid UUID length: 6
+ERROR: 2023/01/22 16:00:03 error-handler.go:17: Invalid User Request invalid UUID length: 6
+ERROR: 2023/01/22 16:04:09 error-handler.go:17: Invalid User Request invalid UUID length: 6
