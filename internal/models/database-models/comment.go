@@ -17,8 +17,8 @@ type Comment struct {
 	UserID   uuid.UUID `json:"userId"`
 
 	// Has one
-	Thread Thread
-	User   User
+	Thread Thread `json:"thread"`
+	User   User   `json:"user"`
 
 	// Many to many relationship
 	UsersLiked    []User `gorm:"many2many:comment_likes;" json:"usersLiked"`

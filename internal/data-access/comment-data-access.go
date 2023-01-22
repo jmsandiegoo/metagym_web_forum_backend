@@ -26,7 +26,7 @@ func CreateNewComment(comment *databasemodels.Comment) (*databasemodels.Comment,
 
 func FindCommentsByThreadId(threadId uuid.UUID) ([]databasemodels.Comment, error) {
 	var comments []databasemodels.Comment
-	err := database.Database.Where("thread_id = ?", threadId).Preload("User").Find(&comments).Error
+	err := database.Database.Where("thread_id = ?", threadId).Preload("UsersLiked").Preload("UsersDisliked").Preload("User.Profile").Order("created_at desc").Find(&comments).Error
 
 	if err != nil {
 		return nil, err

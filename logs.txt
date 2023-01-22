@@ -547,3 +547,87 @@ INFO: 2023/01/21 21:51:47 main.go:26: Starting server...
 ERROR: 2023/01/21 21:53:44 error-handler.go:17: Authentication Required
 ERROR: 2023/01/21 21:53:44 error-handler.go:17: Authentication Required
 INFO: 2023/01/21 21:55:14 main.go:26: Starting server...
+INFO: 2023/01/21 22:26:24 main.go:26: Starting server...
+ERROR: 2023/01/21 22:29:32 error-handler.go:17: Authentication Required
+ERROR: 2023/01/21 22:29:32 error-handler.go:17: Authentication Required
+INFO: 2023/01/21 22:30:16 main.go:26: Starting server...
+INFO: 2023/01/21 22:33:34 main.go:26: Starting server...
+ERROR: 2023/01/21 22:34:36 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 22:34:40 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 22:36:42 error-handler.go:17: Invalid Credentials crypto/bcrypt: hashedPassword is not the hash of the given password
+ERROR: 2023/01/21 22:36:50 error-handler.go:17: Invalid Credentials crypto/bcrypt: hashedPassword is not the hash of the given password
+ERROR: 2023/01/21 22:37:07 error-handler.go:17: Invalid Credentials crypto/bcrypt: hashedPassword is not the hash of the given password
+ERROR: 2023/01/21 22:37:45 error-handler.go:17: Invalid Credentials crypto/bcrypt: hashedPassword is not the hash of the given password
+INFO: 2023/01/21 23:10:01 main.go:26: Starting server...
+ERROR: 2023/01/21 23:13:49 error-handler.go:17: Authentication Required
+ERROR: 2023/01/21 23:13:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:15:18 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:16:48 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 23:16:48 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:17:38 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 23:17:38 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:18:35 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:21:35 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:23:31 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:25:49 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 23:25:50 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:25:53 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:25:55 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:25:56 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:25:59 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:56 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:56 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:58 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:59 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:59 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:59 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:26:59 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:00 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:00 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:01 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:01 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:01 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:27:02 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:29:02 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:29:03 error-handler.go:17: WHERE conditions required
+ERROR: 2023/01/21 23:29:04 error-handler.go:17: WHERE conditions required
+INFO: 2023/01/21 23:35:46 main.go:26: Starting server...
+ERROR: 2023/01/21 23:36:39 error-handler.go:17: Invalid Request
+ERROR: 2023/01/21 23:58:07 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 00:31:34 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 00:31:34 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 00:52:49 error-handler.go:17: No permission to carry out the request
+ERROR: 2023/01/22 01:00:55 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:00:55 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:00:55 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:05:02 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 01:06:37 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:06:40 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:07:50 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:07:59 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:10 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:34 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:34 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:35 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:35 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:11:35 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:12:24 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:12:24 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:14:56 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:15:47 error-handler.go:17: Invalid User Request invalid UUID length: 9
+ERROR: 2023/01/22 01:19:00 error-handler.go:17: Invalid User Request invalid UUID length: 4
+ERROR: 2023/01/22 01:19:00 error-handler.go:17: Invalid User Request invalid UUID length: 4
+ERROR: 2023/01/22 01:19:29 error-handler.go:17: Invalid User Request invalid UUID length: 4
+ERROR: 2023/01/22 01:19:54 error-handler.go:17: Invalid User Request invalid UUID length: 4
+ERROR: 2023/01/22 01:23:01 error-handler.go:17: Invalid User Request invalid UUID length: 4
+INFO: 2023/01/22 11:41:31 main.go:26: Starting server...
+ERROR: 2023/01/22 11:41:45 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 11:41:45 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 12:20:28 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 13:05:12 error-handler.go:17: Authentication Required
+ERROR: 2023/01/22 13:05:12 error-handler.go:17: Authentication Required
+INFO: 2023/01/22 13:42:46 main.go:26: Starting server...
