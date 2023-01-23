@@ -24,7 +24,7 @@ func CreateNewThread(thread *databasemodels.Thread) (*databasemodels.Thread, err
 
 func FindThreadById(id uuid.UUID) (databasemodels.Thread, error) {
 	var thread databasemodels.Thread
-	err := database.Database.Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Preload("User.Profile").Where("id=?", id).Find(&thread).Error
+	err := database.Database.Preload("Comments").Preload("UsersLiked").Preload("UsersDisliked").Preload("Interests").Preload("User.Profile").Where("id=?", id).First(&thread).Error
 
 	if err != nil {
 		return databasemodels.Thread{}, err
@@ -35,7 +35,7 @@ func FindThreadById(id uuid.UUID) (databasemodels.Thread, error) {
 
 func FindThreadByIdLocked(id uuid.UUID, tx *gorm.DB) (databasemodels.Thread, error) {
 	var thread databasemodels.Thread // garbage collected once no reference
-	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).Find(&thread).Error
+	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).First(&thread).Error
 	if err != nil {
 		return databasemodels.Thread{}, err
 	}

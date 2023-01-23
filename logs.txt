@@ -648,3 +648,122 @@ ERROR: 2023/01/22 15:59:24 error-handler.go:17: Invalid User Request invalid UUI
 ERROR: 2023/01/22 15:59:54 error-handler.go:17: Invalid User Request invalid UUID length: 6
 ERROR: 2023/01/22 16:00:03 error-handler.go:17: Invalid User Request invalid UUID length: 6
 ERROR: 2023/01/22 16:04:09 error-handler.go:17: Invalid User Request invalid UUID length: 6
+INFO: 2023/01/23 23:27:52 main.go:26: Starting server...
+ERROR: 2023/01/23 23:27:55 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:27:55 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:36:02 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:36:02 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:39:29 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:39:29 error-handler.go:17: record not found
+ERROR: 2023/01/23 23:58:01 error-handler.go:17: Authentication Required
+ERROR: 2023/01/23 23:58:01 error-handler.go:17: Authentication Required
+INFO: 2023/01/24 00:32:25 main.go:26: Starting server...
+ERROR: 2023/01/24 00:40:07 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:40:07 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:40:31 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:40:39 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:41:12 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:41:25 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:41:54 error-handler.go:17: record not found
+ERROR: 2023/01/24 00:42:32 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 00:42:32 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 00:42:32 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 00:42:32 error-handler.go:17: Invalid User Request invalid UUID length: 37
+INFO: 2023/01/24 01:09:50 main.go:26: Starting server...
+INFO: 2023/01/24 01:10:43 main.go:26: Starting server...
+INFO: 2023/01/24 01:11:45 main.go:26: Starting server...
+ERROR: 2023/01/24 01:13:30 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:13:30 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:13:30 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:13:30 error-handler.go:17: Authentication Required
+INFO: 2023/01/24 01:14:07 main.go:26: Starting server...
+INFO: 2023/01/24 01:15:14 main.go:26: Starting server...
+ERROR: 2023/01/24 01:18:45 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:18:45 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:36 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:36 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:43 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:43 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:45 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:45 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:48 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:48 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:55 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:55 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:58 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:19:58 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:29 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:35 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:38 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:39 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:42 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:20:42 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:02 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:02 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:05 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:05 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:21 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:21 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:24 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:24 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:31 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:31 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:42 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:42 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:46 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:46 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:59 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:21:59 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:22:57 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:22:57 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:00 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:03 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:17 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:23 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:26 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:23:28 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:02 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:02 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:12 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:16 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:29 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:29 error-handler.go:17: Invalid User Request invalid UUID length: 37
+ERROR: 2023/01/24 01:24:49 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:24:49 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:25:16 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:25:16 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:31:59 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:31:59 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:31:59 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:31:59 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:32:31 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:32:31 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:32:31 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:32:31 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:32:39 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:32:39 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:32:39 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:32:39 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:33:00 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:33:00 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:33:10 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:33:10 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:33:10 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:33:10 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:35:09 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:35:09 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:37:14 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:37:14 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:37:14 thread-data-access.go:30: Error here
+ERROR: 2023/01/24 01:37:14 error-handler.go:17: record not found
+ERROR: 2023/01/24 01:49:53 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:49:53 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:49:53 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 01:49:53 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 02:17:07 error-handler.go:17: record not found
+ERROR: 2023/01/24 02:17:07 error-handler.go:17: record not found
+ERROR: 2023/01/24 02:20:09 error-handler.go:17: Invalid User Request invalid UUID length: 0
+ERROR: 2023/01/24 02:20:56 error-handler.go:17: Invalid User Request invalid UUID length: 0
+ERROR: 2023/01/24 02:23:24 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 02:23:24 error-handler.go:17: Authentication Required
+ERROR: 2023/01/24 02:39:13 error-handler.go:17: Invalid Request

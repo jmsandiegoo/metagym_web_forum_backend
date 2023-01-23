@@ -37,7 +37,7 @@ func FindCommentsByThreadId(threadId uuid.UUID) ([]databasemodels.Comment, error
 
 func FindCommentById(id uuid.UUID) (databasemodels.Comment, error) {
 	var comment databasemodels.Comment // garbage collected once no reference
-	err := database.Database.Preload("Thread").Where("id=?", id).Find(&comment).Error
+	err := database.Database.Preload("Thread").Where("id=?", id).First(&comment).Error
 
 	if err != nil {
 		return databasemodels.Comment{}, err
@@ -48,7 +48,7 @@ func FindCommentById(id uuid.UUID) (databasemodels.Comment, error) {
 
 func FindCommentByIdLocked(id uuid.UUID, tx *gorm.DB) (databasemodels.Comment, error) {
 	var comment databasemodels.Comment // garbage collected once no reference
-	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).Find(&comment).Error
+	err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("id=?", id).First(&comment).Error
 
 	if err != nil {
 		return databasemodels.Comment{}, err
