@@ -767,3 +767,5 @@ ERROR: 2023/01/24 02:20:56 error-handler.go:17: Invalid User Request invalid UUI
 ERROR: 2023/01/24 02:23:24 error-handler.go:17: Authentication Required
 ERROR: 2023/01/24 02:23:24 error-handler.go:17: Authentication Required
 ERROR: 2023/01/24 02:39:13 error-handler.go:17: Invalid Request
+ERROR: 2023/01/24 03:04:11 error-handler.go:17: ERROR: duplicate key value violates unique constraint "users_username_key" (SQLSTATE 23505)
+INFO: 2023/01/24 03:07:32 main.go:26: Starting server...
