@@ -86,6 +86,9 @@ DB_PORT="<<DB_PORT>>"
 # Authentication credentials
 TOKEN_TTL="2000"
 JWT_PRIVATE_KEY="THIS_IS_NOT_SO_SECRET+YOU_SHOULD_DEFINITELY_CHANGE_IT"
+
+# CORS
+FRONTEND_URL="<<URL_OF_FRONTEND>>"
 ```
 
 In the `.env.local` file add the values this time:
@@ -102,6 +105,9 @@ DB_PORT="5432"
 TOKEN_TTL="2000"
 JWT_PRIVATE_KEY="THIS_IS_NOT_SO_SECRET+YOU_SHOULD_DEFINITELY_CHANGE_IT"
 DOMAIN="localhost"
+
+# CORS
+FRONTEND_URL="http://localhost:3000"
 ```
 
 - run `go run cmd/server/main.go` to start the api server, assuming the database server is already running.

@@ -6,6 +6,7 @@ import (
 	"metagym_web_forum_backend/internal/database"
 	"metagym_web_forum_backend/internal/middleware"
 	"metagym_web_forum_backend/internal/routes"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -18,7 +19,7 @@ func main() {
 	loadDatabase()
 	r := gin.Default()
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowOrigins = []string{os.Getenv("FRONTEND_URL")}
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
