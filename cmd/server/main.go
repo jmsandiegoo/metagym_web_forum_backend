@@ -26,8 +26,8 @@ func main() {
 	r.Use(middleware.ErrorHandlerMiddleware())
 	api.InfoLogger.Println("Starting server...")
 	routes.GetRoutes(r)
-	r.Run("localhost:8080")
-	api.InfoLogger.Println("Server is now listening on localhost:8080")
+	r.Run("localhost:" + os.Getenv("PORT"))
+	api.InfoLogger.Println("Server is now listening on localhost:" + os.Getenv("PORT"))
 }
 
 func loadEnv() {
