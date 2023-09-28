@@ -26,7 +26,7 @@ func main() {
 	r.Use(middleware.ErrorHandlerMiddleware())
 	api.InfoLogger.Println("Starting server...")
 	routes.GetRoutes(r)
-	r.Run("localhost:" + os.Getenv("PORT"))
+	r.Run(os.Getenv("HOST") + ":" + os.Getenv("PORT"))
 	api.InfoLogger.Println("Server is now listening on localhost:" + os.Getenv("PORT"))
 }
 
